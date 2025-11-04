@@ -69,12 +69,12 @@ export default function OnboardingPersonalizationPanel({
       </div>
 
       {/* Data Grid */}
-      <div className="space-y-2.5">
+      <div className="space-y-3">
         {groups.map(({ key, label }) => {
           const v = values[key];
           return (
-            <div key={key} className="flex justify-between items-center">
-              <span className="text-xs text-valasys-gray-600">{label}</span>
+            <div key={key} className="grid grid-cols-2 gap-2 items-center">
+              <span className="text-xs text-valasys-gray-600 font-medium">{label}</span>
               <AnimatePresence mode="wait">
                 {v ? (
                   <motion.span
@@ -93,7 +93,7 @@ export default function OnboardingPersonalizationPanel({
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="text-xs text-valasys-gray-400"
+                    className="text-xs text-valasys-gray-400 text-right"
                   >
                     —
                   </motion.span>
