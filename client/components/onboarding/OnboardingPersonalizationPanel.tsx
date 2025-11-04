@@ -74,7 +74,9 @@ export default function OnboardingPersonalizationPanel({
           const v = values[key];
           return (
             <div key={key} className="grid grid-cols-2 gap-2 items-center">
-              <span className="text-xs text-valasys-gray-600 font-medium">{label}</span>
+              <span className="text-xs text-valasys-gray-600 font-medium">
+                {label}
+              </span>
               <AnimatePresence mode="wait">
                 {v ? (
                   <motion.span

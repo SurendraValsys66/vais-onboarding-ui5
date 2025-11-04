@@ -14,7 +14,10 @@ export default function StepProgress({
   title,
   subtitle,
 }: StepProgressProps) {
-  const value = Math.min(100, Math.max(0, Math.round(((current - 1) / total) * 100)));
+  const value = Math.min(
+    100,
+    Math.max(0, Math.round(((current - 1) / total) * 100)),
+  );
   const prev = useRef(value);
   const isChange = prev.current !== value;
   prev.current = value;
