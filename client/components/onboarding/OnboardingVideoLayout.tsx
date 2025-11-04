@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import OnboardingSummaryPanel from "./OnboardingSummaryPanel";
+import OnboardingPersonalizationPanel from "./OnboardingPersonalizationPanel";
 import { SummaryValues } from "./OnboardingSummaryPanel";
 
 export default function OnboardingVideoLayout({
@@ -45,23 +45,24 @@ export default function OnboardingVideoLayout({
 
       {/* Main content container */}
       <div className="relative z-10 min-h-screen flex items-center justify-center p-4 sm:p-6">
-        <div className="w-full max-w-7xl">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
-            {/* Left side - Main card with content */}
-            <div className="lg:col-span-2">
-              <div className="rounded-2xl bg-white shadow-2xl overflow-hidden">
-                <div className="p-6 sm:p-8 md:p-10">
+        <div className="w-full max-w-4xl">
+          <div className="rounded-2xl bg-white shadow-2xl overflow-hidden">
+            <div className="p-6 sm:p-8 md:p-10">
+              {/* Content and Personalization side by side */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                {/* Left side - Main form content */}
+                <div className="lg:col-span-2">
                   {content}
                 </div>
-              </div>
-            </div>
 
-            {/* Right side - Summary panel */}
-            <div className="lg:col-span-1">
-              <OnboardingSummaryPanel
-                values={summaryValues}
-                total={summaryTotal}
-              />
+                {/* Right side - Personalization panel inside card */}
+                <div className="lg:col-span-1">
+                  <OnboardingPersonalizationPanel
+                    values={summaryValues}
+                    total={summaryTotal}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
