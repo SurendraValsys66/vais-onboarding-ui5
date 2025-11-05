@@ -9,9 +9,6 @@ export default function OnboardingPersonalizationPanel({
   values: SummaryValues;
   total: number;
 }) {
-  const answered = Object.values(values).filter(Boolean).length;
-  const percentage = Math.round((answered / total) * 100);
-
   const groups: { key: keyof SummaryValues; label: string }[] = [
     { key: "role", label: "Role" },
     { key: "useCase", label: "Goal" },
