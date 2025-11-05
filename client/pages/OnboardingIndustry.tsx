@@ -70,6 +70,7 @@ export default function OnboardingIndustry() {
       logoSrc="https://cdn.builder.io/api/v1/image/assets%2Ff2a051d62a994479965d33c6eada9792%2F9b770886bd6142129584a6e279795c21?format=webp&width=800"
       summaryValues={initial}
       summaryTotal={6}
+      currentStep={4}
       content={
         <div className="space-y-8">
           <div>

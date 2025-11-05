@@ -35,30 +35,6 @@ const ROLES = [
   { label: "Sales Representative", icon: UserRound },
 ] as const;
 
-function PillOption({
-  id,
-  selected,
-  children,
-}: {
-  id: string;
-  selected: boolean;
-  children: React.ReactNode;
-}) {
-  return (
-    <Label
-      htmlFor={id}
-      className={cn(
-        "inline-flex items-center gap-2 rounded-full border px-3 py-1.5 cursor-pointer transition-colors text-sm",
-        selected
-          ? "border-valasys-orange bg-valasys-orange/10 text-valasys-orange"
-          : "border-valasys-gray-200 hover:border-valasys-orange/60 text-valasys-gray-800",
-      )}
-    >
-      {children}
-    </Label>
-  );
-}
-
 export default function OnboardingRole() {
   const navigate = useNavigate();
   const initial = getOnboarding();
@@ -86,6 +62,7 @@ export default function OnboardingRole() {
       logoSrc="https://cdn.builder.io/api/v1/image/assets%2Ff2a051d62a994479965d33c6eada9792%2F9b770886bd6142129584a6e279795c21?format=webp&width=800"
       summaryValues={initial}
       summaryTotal={6}
+      currentStep={1}
       content={
         <div className="space-y-8">
           <div>
@@ -106,7 +83,7 @@ export default function OnboardingRole() {
               setRole(v);
               if (v) saveOnboarding({ role: v });
             }}
-            className="flex flex-wrap gap-2"
+            className="grid grid-cols-2 gap-3"
           >
             {ROLES.map((r) => (
               <motion.div
@@ -114,31 +91,40 @@ export default function OnboardingRole() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.99 }}
               >
-                <PillOption id={`role-${r.label}`} selected={role === r.label}>
+                <Label
+                  htmlFor={`role-${r.label}`}
+                  className={`flex items-center gap-2 rounded-lg border-2 p-3 cursor-pointer transition-all ${
+                    role === r.label
+                      ? "border-valasys-orange bg-valasys-orange/10 text-valasys-orange"
+                      : "border-valasys-gray-200 hover:border-valasys-orange/40"
+                  }`}
+                >
                   <RadioGroupItem
                     id={`role-${r.label}`}
                     value={r.label}
-                    className="sr-only"
+                    className="h-5 w-5"
                   />
-                  <r.icon className="h-4 w-4 text-valasys-blue" />
-                  <span>{r.label}</span>
-                </PillOption>
+                  <r.icon className="h-5 w-5 text-valasys-orange flex-shrink-0" />
+                  <span className="text-sm font-medium text-valasys-gray-900">
+                    {r.label}
+                  </span>
+                </Label>
               </motion.div>
             ))}
           </RadioGroup>
 
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-2">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-4">
             <button
               type="button"
               onClick={onSkip}
-              className="text-sm font-semibold text-valasys-gray-600 transition-colors hover:text-valasys-blue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-valasys-blue underline-offset-4 hover:underline"
+              className="text-sm font-semibold text-valasys-gray-600 transition-colors hover:text-valasys-orange focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-valasys-orange underline-offset-4 hover:underline"
             >
               Skip for now
             </button>
             <Button
               onClick={onNext}
               disabled={!role}
-              className="bg-valasys-blue hover:bg-valasys-blue/90 text-white"
+              className="bg-valasys-orange hover:bg-valasys-orange-light text-white"
             >
               Continue →
             </Button>

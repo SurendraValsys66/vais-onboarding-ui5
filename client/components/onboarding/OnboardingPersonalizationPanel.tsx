@@ -5,13 +5,12 @@ import { SummaryValues } from "./OnboardingSummaryPanel";
 export default function OnboardingPersonalizationPanel({
   values,
   total,
+  currentStep,
 }: {
   values: SummaryValues;
   total: number;
+  currentStep: number;
 }) {
-  const answered = Object.values(values).filter(Boolean).length;
-  const percentage = Math.round((answered / total) * 100);
-
   const groups: { key: keyof SummaryValues; label: string }[] = [
     { key: "role", label: "Role" },
     { key: "useCase", label: "Goal" },
@@ -19,6 +18,14 @@ export default function OnboardingPersonalizationPanel({
     { key: "targetIndustry", label: "Industry" },
     { key: "vaisCategory", label: "Product Category" },
   ];
+
+  const percentage =
+    currentStep === total
+      ? 100
+      : Math.min(
+          100,
+          Math.max(0, Math.round(((currentStep - 1) / total) * 100)),
+        );
 
   return (
     <div className="rounded-xl border border-valasys-orange/20 bg-valasys-orange/5 p-5">
