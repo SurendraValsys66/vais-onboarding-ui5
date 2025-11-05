@@ -35,29 +35,6 @@ const ROLES = [
   { label: "Sales Representative", icon: UserRound },
 ] as const;
 
-function PillOption({
-  id,
-  selected,
-  children,
-}: {
-  id: string;
-  selected: boolean;
-  children: React.ReactNode;
-}) {
-  return (
-    <Label
-      htmlFor={id}
-      className={cn(
-        "inline-flex items-center gap-2 rounded-full border px-3 py-1.5 cursor-pointer transition-colors text-sm",
-        selected
-          ? "border-valasys-orange bg-valasys-orange/10 text-valasys-orange"
-          : "border-valasys-gray-200 hover:border-valasys-orange/60 text-valasys-gray-800",
-      )}
-    >
-      {children}
-    </Label>
-  );
-}
 
 export default function OnboardingRole() {
   const navigate = useNavigate();
