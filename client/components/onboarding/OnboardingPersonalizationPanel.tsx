@@ -18,10 +18,13 @@ export default function OnboardingPersonalizationPanel({
   ];
 
   const answered = Object.values(values).filter(Boolean).length;
-  const percentage = Math.min(
-    100,
-    Math.max(0, Math.round(((answered - 1) / total) * 100)),
-  );
+  const percentage =
+    answered === groups.length
+      ? 100
+      : Math.min(
+          100,
+          Math.max(0, Math.round(((answered - 1) / total) * 100)),
+        );
 
   return (
     <div className="rounded-xl border border-valasys-orange/20 bg-valasys-orange/5 p-5">
