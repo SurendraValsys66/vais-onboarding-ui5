@@ -93,7 +93,7 @@ export default function OnboardingRole() {
               >
                 <Label
                   htmlFor={`role-${r.label}`}
-                  className={`flex flex-col items-center gap-2 rounded-lg border-2 p-3 cursor-pointer transition-all ${
+                  className={`flex items-center gap-2 rounded-lg border-2 p-3 cursor-pointer transition-all ${
                     role === r.label
                       ? "border-valasys-orange bg-valasys-orange/10 text-valasys-orange"
                       : "border-valasys-gray-200 hover:border-valasys-orange/40"
@@ -102,10 +102,10 @@ export default function OnboardingRole() {
                   <RadioGroupItem
                     id={`role-${r.label}`}
                     value={r.label}
-                    className="sr-only"
+                    className="h-5 w-5"
                   />
                   <r.icon className="h-5 w-5 text-valasys-orange flex-shrink-0" />
-                  <span className="text-xs font-medium text-center text-valasys-gray-900">
+                  <span className="text-sm font-medium text-valasys-gray-900">
                     {r.label}
                   </span>
                 </Label>
