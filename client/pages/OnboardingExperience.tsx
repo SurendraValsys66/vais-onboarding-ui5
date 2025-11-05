@@ -12,8 +12,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { Baby, Gauge, GraduationCap } from "lucide-react";
 import { motion } from "framer-motion";
-import OnboardingSplitLayout from "@/components/onboarding/OnboardingSplitLayout";
-import OnboardingIllustration from "@/components/onboarding/OnboardingIllustration";
+import OnboardingVideoLayout from "@/components/onboarding/OnboardingVideoLayout";
 
 const LEVELS = [
   { label: "Beginner", icon: Baby },
@@ -23,8 +22,8 @@ const LEVELS = [
 
 export default function OnboardingExperience() {
   const navigate = useNavigate();
-  const initial = getOnboarding().experience ?? "";
-  const [value, setValue] = useState<string>(initial);
+  const initial = getOnboarding();
+  const [value, setValue] = useState<string>(initial.experience ?? "");
 
   const onNext = () => {
     if (!value) return;
@@ -44,10 +43,12 @@ export default function OnboardingExperience() {
   };
 
   return (
-    <OnboardingSplitLayout
+    <OnboardingVideoLayout
       logoSrc="https://cdn.builder.io/api/v1/image/assets%2Ff2a051d62a994479965d33c6eada9792%2F9b770886bd6142129584a6e279795c21?format=webp&width=800"
-      left={
-        <div className="space-y-8 mx-auto">
+      summaryValues={initial}
+      summaryTotal={6}
+      content={
+        <div className="space-y-8">
           <div>
             <div className="text-sm font-medium text-valasys-gray-700">
               A few more details
@@ -64,7 +65,7 @@ export default function OnboardingExperience() {
               setValue(v);
               if (v) saveOnboarding({ experience: v as any });
             }}
-            className="grid gap-3"
+            className="space-y-3"
           >
             {LEVELS.map((lvl) => (
               <motion.div
@@ -74,22 +75,26 @@ export default function OnboardingExperience() {
               >
                 <Label
                   htmlFor={`lvl-${lvl.label}`}
-                  className={`flex items-center gap-3 rounded-lg border p-3 cursor-pointer transition-colors ${
+                  className={`flex items-center gap-3 rounded-lg border-2 p-4 cursor-pointer transition-all ${
                     value === lvl.label
-                      ? "border-valasys-orange bg-valasys-orange/5"
-                      : "border-valasys-gray-200 hover:border-valasys-orange/60"
+                      ? "border-valasys-orange bg-valasys-orange/10 text-valasys-orange"
+                      : "border-valasys-gray-200 hover:border-valasys-orange/40"
                   }`}
                 >
-                  <RadioGroupItem id={`lvl-${lvl.label}`} value={lvl.label} />
-                  <lvl.icon className="h-4 w-4 text-valasys-orange" />
-                  <span className="text-sm text-valasys-gray-800">
+                  <RadioGroupItem
+                    id={`lvl-${lvl.label}`}
+                    value={lvl.label}
+                    className="h-5 w-5"
+                  />
+                  <lvl.icon className="h-5 w-5 text-valasys-orange flex-shrink-0" />
+                  <span className="text-sm font-medium text-valasys-gray-900">
                     {lvl.label}
                   </span>
                 </Label>
               </motion.div>
             ))}
           </RadioGroup>
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-2">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-4">
             <button
               type="button"
               onClick={onSkip}
@@ -102,17 +107,10 @@ export default function OnboardingExperience() {
               disabled={!value}
               className="bg-valasys-orange hover:bg-valasys-orange-light text-white"
             >
-              Continue
+              Continue →
             </Button>
           </div>
         </div>
-      }
-      right={
-        <OnboardingIllustration
-          variant="experience"
-          imageSrc="https://cdn.builder.io/api/v1/image/assets%2Ff2a051d62a994479965d33c6eada9792%2Fdd5060e416d64ccea76a3915edd085f1?format=webp&width=800"
-          imageAlt="Dashboard preview"
-        />
       }
     />
   );

@@ -11,8 +11,7 @@ import {
 } from "@/lib/onboardingStorage";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import OnboardingSplitLayout from "@/components/onboarding/OnboardingSplitLayout";
-import OnboardingIllustration from "@/components/onboarding/OnboardingIllustration";
+import OnboardingVideoLayout from "@/components/onboarding/OnboardingVideoLayout";
 import {
   Factory,
   ShoppingBag,
@@ -44,9 +43,9 @@ type IndustryValue = (typeof INDUSTRY_OPTIONS)[number]["label"];
 
 export default function OnboardingIndustry() {
   const navigate = useNavigate();
-  const initial = getOnboarding().targetIndustry ?? "";
+  const initial = getOnboarding();
   const [value, setValue] = useState<IndustryValue | "">(
-    initial as IndustryValue | "",
+    (initial.targetIndustry as IndustryValue | "") ?? "",
   );
 
   const onNext = () => {
@@ -67,10 +66,12 @@ export default function OnboardingIndustry() {
   };
 
   return (
-    <OnboardingSplitLayout
+    <OnboardingVideoLayout
       logoSrc="https://cdn.builder.io/api/v1/image/assets%2Ff2a051d62a994479965d33c6eada9792%2F9b770886bd6142129584a6e279795c21?format=webp&width=800"
-      left={
-        <div className="space-y-8 mx-auto">
+      summaryValues={initial}
+      summaryTotal={6}
+      content={
+        <div className="space-y-8">
           <div>
             <div className="text-sm font-medium text-valasys-gray-700">
               Almost there
@@ -89,7 +90,7 @@ export default function OnboardingIndustry() {
                 saveOnboarding({ targetIndustry: v as IndustryValue });
               }
             }}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-3"
+            className="grid grid-cols-2 gap-3"
           >
             {INDUSTRY_OPTIONS.map((option) => (
               <motion.div
@@ -99,25 +100,26 @@ export default function OnboardingIndustry() {
               >
                 <Label
                   htmlFor={`industry-${option.label}`}
-                  className={`flex items-center gap-3 rounded-lg border p-3 cursor-pointer transition-colors ${
+                  className={`flex items-center gap-2 rounded-lg border-2 p-3 cursor-pointer transition-all ${
                     value === option.label
-                      ? "border-valasys-orange bg-valasys-orange/5"
-                      : "border-valasys-gray-200 hover:border-valasys-orange/60"
+                      ? "border-valasys-orange bg-valasys-orange/10 text-valasys-orange"
+                      : "border-valasys-gray-200 hover:border-valasys-orange/40"
                   }`}
                 >
                   <RadioGroupItem
                     id={`industry-${option.label}`}
                     value={option.label}
+                    className="h-5 w-5"
                   />
-                  <option.icon className="h-4 w-4 text-valasys-orange" />
-                  <span className="text-sm text-valasys-gray-800">
+                  <option.icon className="h-5 w-5 text-valasys-orange flex-shrink-0" />
+                  <span className="text-sm font-medium text-valasys-gray-900">
                     {option.label}
                   </span>
                 </Label>
               </motion.div>
             ))}
           </RadioGroup>
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-2">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-4">
             <button
               type="button"
               onClick={onSkip}
@@ -130,17 +132,10 @@ export default function OnboardingIndustry() {
               disabled={!value}
               className="bg-valasys-orange hover:bg-valasys-orange-light text-white"
             >
-              Continue
+              Continue →
             </Button>
           </div>
         </div>
-      }
-      right={
-        <OnboardingIllustration
-          variant="industry"
-          imageSrc="https://cdn.builder.io/api/v1/image/assets%2Ff2a051d62a994479965d33c6eada9792%2Fdd5060e416d64ccea76a3915edd085f1?format=webp&width=800"
-          imageAlt="Dashboard preview"
-        />
       }
     />
   );
