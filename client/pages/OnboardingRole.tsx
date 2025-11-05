@@ -84,7 +84,7 @@ export default function OnboardingRole() {
               setRole(v);
               if (v) saveOnboarding({ role: v });
             }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-3"
+            className="grid grid-cols-2 gap-3"
           >
             {ROLES.map((r) => (
               <motion.div
