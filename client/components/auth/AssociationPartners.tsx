@@ -36,7 +36,7 @@ const partners: PartnerItem[] = [
 
 export default function AssociationPartners() {
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="grid grid-cols-4 gap-4">
       {partners.map((p) => (
         <div
           key={p.name}
