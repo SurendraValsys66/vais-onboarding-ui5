@@ -20,6 +20,18 @@ const partners: PartnerItem[] = [
     fallbackBg: "bg-valasys-blue",
     tagline: "Buyer Insights",
   },
+  {
+    name: "ISO/IEC 27001:2022",
+    logo: "https://cdn.builder.io/api/v1/image/assets%2Fe3ea16bf6885485ab229cfbe01a17e40%2Fa4bc0cdc83374787b7aec139bd53130f?format=webp&width=800",
+    fallbackBg: "bg-yellow-600",
+    tagline: "Security Certified",
+  },
+  {
+    name: "ISO/IEC 27001:2019",
+    logo: "https://cdn.builder.io/api/v1/image/assets%2Fe3ea16bf6885485ab229cfbe01a17e40%2Fae1e95d3b2f7433887eb2865d2fde837?format=webp&width=800",
+    fallbackBg: "bg-yellow-600",
+    tagline: "Security Certified",
+  },
 ];
 
 export default function AssociationPartners() {
